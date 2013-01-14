@@ -1,0 +1,5 @@
+ChartingHelper/bin/
+ChartingHelper/obj/
+*.suo
+ModelAndSimulations/bin/
+ModelAndSimulations/obj/
