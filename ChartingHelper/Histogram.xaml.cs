@@ -24,9 +24,22 @@ namespace ChartingHelper {
             InitializeComponent();
             this.DataContext = this;
             draw(binSize);
+            this.NumberOfDataPoints = vals.Count();
         }
 
+        private int _numberOfDataPoints;
+
+        public int NumberOfDataPoints {
+            get { return _numberOfDataPoints; }
+            set {
+                _numberOfDataPoints = value;
+                OnPropertyChanged("NumberOfDataPoints");
+            }
+        }
+
+
         private void draw(double binSize) {
+            this.binSize.Value = binSize;
             var series = vals.Histogram(binSize);
             setSeries(series, (List<double>)series.Tag);
         }
@@ -37,28 +50,14 @@ namespace ChartingHelper {
 
         public PlotModel Plot {
             get { return _plot; }
-            set { _plot = value;
-            OnPropertyChanged("Plot");
+            set {
+                _plot = value;
+                OnPropertyChanged("Plot");
             }
         }
 
         private Brush errorColor = Brushes.LightPink;
         private Brush workingColor = Brushes.LightGreen;
-        double binSizeVal;
-
-        private string _binSize;
-        public string BinSize {
-            get { return _binSize; }
-            set {
-                _binSize = value;
-                if (!double.TryParse(this.binSize.Text, out binSizeVal)) {
-                    this.binSize.Background = errorColor;
-                } else {
-                    this.binSize.Background = workingColor;
-                }
-                OnPropertyChanged("BinSize");
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -81,17 +80,7 @@ namespace ChartingHelper {
         }
 
         private void redraw_Click(object sender, RoutedEventArgs e) {
-            if (!double.TryParse(this.binSize.Text, out binSizeVal)) return;
-            draw(binSizeVal);
-
+            draw(this.binSize.Value);
         }
-
-        private void binSize_TextChanged(object sender, TextChangedEventArgs e) {
-            if (!double.TryParse(this.binSize.Text, out binSizeVal)) {
-                this.binSize.Background = errorColor;
-            } else {
-                this.binSize.Background = workingColor;
-            }
-        }   
     }
 }

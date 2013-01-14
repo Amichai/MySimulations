@@ -3,58 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ad="http://avalondock.codeplex.com"
         xmlns:h="clr-namespace:ChartingHelper;assembly=ChartingHelper"
-        Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <DataTemplate x:Key="simulationTemplate">
-            <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>Iterations:</TextBlock>
-                <TextBlock Text="{Binding Iter}" Margin="2"></TextBlock>
-                <TextBlock>Ratio</TextBlock>
-                <TextBlock Text="{Binding Ratio}"  Margin="2"/>
-            </StackPanel>
-            </StackPanel>
-        </DataTemplate>
-    </Window.Resources>
+        xmlns:m="clr-namespace:ModelAndSimulations"
+        Title="MainWindow" Height="600" Width="525">
     <Grid>
-            <ad:DockingManager x:Name="dockManager">
-                <ad:LayoutRoot>
-                    <ad:LayoutPanel Orientation="Horizontal">
-                        <ad:LayoutDocumentPaneGroup  DockWidth="500">
+        <ad:DockingManager x:Name="dockManager">
+            <ad:LayoutRoot>
+                <ad:LayoutPanel Orientation="Horizontal">
+                    <ad:LayoutDocumentPaneGroup  DockWidth="500">
                         <ad:LayoutDocumentPane x:Name="pane">
-                            <ad:LayoutAnchorable Title="Simulations">
-                            <DockPanel>
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                <TextBlock Margin="5">Increment:</TextBlock>
-                                <!--<TextBlock Margin="5" Text="{Binding Increment}"></TextBlock>-->
-                                        <h:InputValidator Name="increment"></h:InputValidator>
-                                    </StackPanel>
-                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                        <Button Height="50" Margin="20,5,20,5" Width="100" Click="Spawn_Click">Spawn</Button>
-                                        <TextBlock Margin="20">Quantity:</TextBlock>
-                                        <h:InputValidator Name="quantity" Margin="0,20,0,20" Width="200"></h:InputValidator>
-                                    </StackPanel>
-                                    <Button Height="50" Margin="20,5,20,5" DockPanel.Dock="Top" Click="Poll_Click">Poll</Button>
-                                    <Button Height="50" Margin="20,5,20,5" DockPanel.Dock="Top" Click="Histogram_Click">Histogram</Button>
-                                    <Button Height="50" Margin="20,5,20,5" DockPanel.Dock="Top" Click="Clear_Click">Clear</Button>
-                                    <Border>
-                                <ScrollViewer>
-                                    <ListBox Name="simulationsUI" ItemTemplate="{StaticResource simulationTemplate}">
+                            <ad:LayoutAnchorable Title="Urn Model - Mimetic Contagion">
+                                <m:UrnModel />
 
-                                    </ListBox>
-                                </ScrollViewer>
-                            </Border>
-                        </DockPanel>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Stats">
-                                <TextBlock>
-                                    
-                                </TextBlock>
                             </ad:LayoutAnchorable>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
                 </ad:LayoutPanel>
-                </ad:LayoutRoot>
-            </ad:DockingManager>
+            </ad:LayoutRoot>
+        </ad:DockingManager>
     </Grid>
 </Window>
