@@ -44,7 +44,14 @@ namespace ChartingHelper {
             plot.Axes.Add(ca);
             plot.Series.Add(b);
             this.Root.Model = plot;
-        }   
+        }
+
+
+        public void AddSeries(CandleStickSeries s) {
+            s.Color = colors[plot.Series.Count() % colors.Count()];
+            plot.Series.Add(s);
+            this.Root.Model = plot;
+        }
 
         public void AddSeries(ScatterSeries s) {
             s.MarkerFill = colors[plot.Series.Count() % colors.Count()];
@@ -67,7 +74,6 @@ namespace ChartingHelper {
                 case Key.Escape:
                     ///Close this window
                     throw new NotImplementedException();
-                    break;
             }
         }
     }

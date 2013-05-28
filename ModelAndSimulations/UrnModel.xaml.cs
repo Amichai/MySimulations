@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using ChartingHelper;
 using AvalonDock.Layout;
+using OxyPlot;
 
 namespace ModelAndSimulations {
     /// <summary>
@@ -55,19 +56,34 @@ namespace ModelAndSimulations {
 
         public List<double> ratios = new List<double>();
 
+        private object syncRoot = new object();
+
         void urn_SimulationComplete(object sender, EventArgs e) {
-            ratios.Add(((Urn)sender).Ratio);
+            lock (syncRoot) {
+                double newVal = ((Urn)sender).Ratio;
+                ratios.Add(newVal);
+                if (this.h != null) {
+                    Dispatcher.Invoke((Action)(() => {
+                        this.h.Add(newVal);
+                    }));
+                }
+            }
         }
+
+        /// There is a bug in the histogram class.
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void Poll_Click(object sender, RoutedEventArgs e) {
             List<double> results = new List<double>();
             List<Chart> charts = new List<Chart>();
+            List<LineSeries> series = new List<LineSeries>();
             for (int i = 0; i < urns.Count(); i++) {
-                charts.Add(urns[i].FirstN.LineGraph().Graph());
+                //charts.Add(urns[i].FirstN.LineGraph().Graph());
+                series.Add(urns[i].FirstN.LineGraph());
             }
-            addCharts(charts, "convergence");
+            //addCharts(charts, "convergence");
+            addChart(series.Graph(), "poll");
         }
 
         private void addChart(UserControl ct, string title) {
@@ -98,9 +114,11 @@ namespace ModelAndSimulations {
             addAtIdx(currentIdx);
         }
         #endregion
+        Histogram h = null;
 
         private void Histogram_Click(object sender, RoutedEventArgs e) {
-            addChart(new Histogram(ratios, .05), "Histogram");
+            h = new Histogram(ratios, "", .05);
+            addChart(h, "Histogram");
         }
 
         public int NumberOfSimulations {

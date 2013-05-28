@@ -24,7 +24,7 @@
         <ad:LayoutPanel Orientation="Horizontal">
             <ad:LayoutDocumentPaneGroup  DockWidth="500">
                 <ad:LayoutDocumentPane x:Name="pane">
-        <ad:LayoutAnchorable Title="Simulations">
+        <ad:LayoutAnchorable Title="Simulations" CanClose="False">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                     <TextBlock Margin="5">Reinforcement value:</TextBlock>

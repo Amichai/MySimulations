@@ -6,17 +6,20 @@
         xmlns:m="clr-namespace:ModelAndSimulations"
         Title="MainWindow" Height="600" Width="525">
     <Grid>
-        <ad:DockingManager x:Name="dockManager">
+        <ad:DockingManager>
             <ad:LayoutRoot>
-                <ad:LayoutPanel Orientation="Horizontal">
-                    <ad:LayoutDocumentPaneGroup  DockWidth="500">
-                        <ad:LayoutDocumentPane x:Name="pane">
-                            <ad:LayoutAnchorable Title="Urn Model - Mimetic Contagion">
-                                <m:UrnModel />
-
-                            </ad:LayoutAnchorable>
-                        </ad:LayoutDocumentPane>
-                    </ad:LayoutDocumentPaneGroup>
+                <ad:LayoutPanel>
+                    <ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorable Title="Criticality">
+                            <m:Criticality />
+                        </ad:LayoutAnchorable>
+                        <ad:LayoutAnchorable Title="Urn Model">
+                            <m:UrnModel />
+                        </ad:LayoutAnchorable>
+                        <ad:LayoutAnchorable Title="Cellular Automata 1D">
+                            <m:CA1DClass1 />
+                        </ad:LayoutAnchorable>
+                    </ad:LayoutAnchorablePane>
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
         </ad:DockingManager>

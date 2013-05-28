@@ -82,12 +82,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CA1DClass1.cs" />
+    <Compile Include="Criticality.xaml.cs">
+      <DependentUpon>Criticality.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Notifier.cs" />
     <Compile Include="ObservableCollection.cs" />
     <Compile Include="Urn.cs" />
     <Compile Include="UrnModel.xaml.cs">
       <DependentUpon>UrnModel.xaml</DependentUpon>
     </Compile>
+    <Page Include="Criticality.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
