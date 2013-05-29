@@ -82,16 +82,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CA1DClass1.cs" />
+    <Compile Include="CA1D.xaml.cs">
+      <DependentUpon>CA1D.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CASystem.cs" />
     <Compile Include="Criticality.xaml.cs">
       <DependentUpon>Criticality.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Layer.cs" />
     <Compile Include="Notifier.cs" />
-    <Compile Include="ObservableCollection.cs" />
     <Compile Include="Urn.cs" />
     <Compile Include="UrnModel.xaml.cs">
       <DependentUpon>UrnModel.xaml</DependentUpon>
     </Compile>
+    <Page Include="CA1D.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Criticality.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +151,7 @@
       <Name>ChartingHelper</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,14 +10,14 @@
             <ad:LayoutRoot>
                 <ad:LayoutPanel>
                     <ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorable Title="Cellular Automata 1D">
+                            <m:CA1D/>
+                        </ad:LayoutAnchorable>
                         <ad:LayoutAnchorable Title="Criticality">
                             <m:Criticality />
                         </ad:LayoutAnchorable>
                         <ad:LayoutAnchorable Title="Urn Model">
                             <m:UrnModel />
-                        </ad:LayoutAnchorable>
-                        <ad:LayoutAnchorable Title="Cellular Automata 1D">
-                            <m:CA1DClass1 />
                         </ad:LayoutAnchorable>
                     </ad:LayoutAnchorablePane>
                 </ad:LayoutPanel>
