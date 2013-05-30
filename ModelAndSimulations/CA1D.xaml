@@ -4,28 +4,87 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-        <ScrollViewer>
+             d:DesignHeight="600" d:DesignWidth="300">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-        <Button Margin="20" Height="30" Width="60" HorizontalAlignment="Left" Click="Iterate_Click">Iterate</Button>
-            <ItemsControl Name="LayersControl">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ItemsControl ItemsSource="{Binding Path=Colors}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Rectangle Width="10" Height="10" Fill="{Binding}"></Rectangle>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>           
-        </ItemsControl>
-    </StackPanel>
-        </ScrollViewer>
+            <StackPanel >
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="times" Margin="5"  HorizontalAlignment="Left" Height="25" Width="100">1</TextBox>
+                    <Button Margin="5" Height="30" Width="60" HorizontalAlignment="Left" Click="Iterate_Click">Iterate</Button>
+                    <Button Margin="5" Height="30" Width="60" HorizontalAlignment="Left" Click="Restart_Click">Restart</Button>
+                </StackPanel>
+                <StackPanel  Orientation="Horizontal">
+                    <TextBlock Margin="5" Width="70">Pixel Width:</TextBlock>
+                    <TextBox Margin="5" HorizontalAlignment="Left" Width="50" Name="PixelWidth" TextChanged="TextBox_TextChanged">5</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" Width="70">Row Size:</TextBlock>
+                    <TextBox Margin="5" HorizontalAlignment="Left" Width="50" Name="RowSizeTextBox" TextChanged="RowSize_TextChanged">50</TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+            <StackPanel >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" >0,0,0</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_000" >0</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Margin="5" >0,0,1</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_001">1</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" >0,1,0</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_010">1</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" >0,1,1</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_011">1</TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Margin="5" >1,0,0</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_100">1</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+
+                    <TextBlock Margin="5" >1,0,1</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_101">0</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" >1,1,0</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_110">0</TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Margin="5" >1,1,1</TextBlock>
+                    <TextBox  Margin="5" Width="20" Name="_111">0</TextBox>
+                </StackPanel>
+            </StackPanel>
+            <ItemsControl Name="LayersControl" Margin="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding Path=Colors}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="{Binding RelativeSource={RelativeSource 
+        FindAncestor, AncestorType={x:Type UserControl}}, 
+Path=RectWidth}" 
+                                               Height="{Binding RelativeSource={RelativeSource 
+        FindAncestor, AncestorType={x:Type UserControl}}, 
+Path=RectWidth}" Fill="{Binding}"></Rectangle>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
