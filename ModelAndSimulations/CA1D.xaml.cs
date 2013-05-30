@@ -24,7 +24,7 @@ namespace ModelAndSimulations {
         private bool compare(int a, int b, int c) {
             return inspectionVals[0] == a && inspectionVals[1] == b && inspectionVals[2] == c;
         }
-        int[] transitionRuleArray = new int[8] { 0, 1,1,1,1,0,0,0};
+        int[] transitionRuleArray = new int[8] { 0, 1, 1, 1, 1, 0, 0, 0 };
 
         public int RowLength {
             get { return _RowLength; }
@@ -52,7 +52,6 @@ namespace ModelAndSimulations {
 
         private int transitionRule(List<int> vals, int idx, int numberOfStates) {
             ///3 inspection pixels, 8 input types
-            this.transitionRule();
             var layerLength = vals.Count;
             int minus1 = idx - 1 < 0 ? idx - 1 + vals.Count() : idx - 1;
             int plus1 = idx + 1 >= vals.Count() ? idx + 1 - vals.Count() : idx + 1;
@@ -86,14 +85,21 @@ namespace ModelAndSimulations {
             this.RectWidth = 5;
             this.RowSize = 50;
             this.Layers = new List<Layer>();
-
+            this.DataContext = this;
+            this.RandomConfig = true;
             for (int i = 0; i < 1; i++) {
-                this.Layers.Add(Layer.Generate(NUMBER_OF_STATES, RowSize, () => rand.Next(5)));
+                this.Layers.Add(Layer.Generate(NUMBER_OF_STATES, RowSize, j => rand.Next(5)));
             }
             system = new CASystem(NUMBER_OF_STATES, this.Layers.First(), transitionRule);
             this.LayersControl.ItemsSource = this.Layers;
-        }         
-        
+            this.iterate_bw = new BackgroundWorker();
+            this.iterate_bw.DoWork += new DoWorkEventHandler(iterate_bw_DoWork);
+        }
+
+        void iterate_bw_DoWork(object sender, DoWorkEventArgs e) {
+            iterate();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string name) {
@@ -114,24 +120,52 @@ namespace ModelAndSimulations {
         private List<Layer> _Layers;
         public const string LayersPropertyName = "Layers";
 
-        private void Iterate_Click(object sender, RoutedEventArgs e) {
-            transitionRule();
+        BackgroundWorker iterate_bw;
+
+        private void iterate() {
             int times = 0;
-            try {
-                times = int.Parse(this.times.Text);
-            } catch {
-                times = 1;
-            }
+
+            Dispatcher.Invoke((Action)(() => {
+                transitionRule();
+                try {
+                    times = int.Parse(this.times.Text);
+                } catch {
+                    times = 1;
+                }
+            }));
+
             for (int i = 0; i < times; i++) {
                 this.Layers.Add(system.Iterate());
             }
-            updateLayersUI();
+
+            Dispatcher.Invoke((Action)(() => {
+                updateLayersUI();
+            }));
+        }
+
+        private void Iterate_Click(object sender, RoutedEventArgs e) {
+            if (iterate_bw.IsBusy) {
+                return;
+            }
+            iterate_bw.RunWorkerAsync();
         }
 
         private void updateLayersUI() {
             this.LayersControl.ItemsSource = null;
             this.LayersControl.ItemsSource = this.Layers;
         }
+
+        public bool RandomConfig {
+            get { return _RandomConfig; }
+            set {
+                if (_RandomConfig != value) {
+                    _RandomConfig = value;
+                    OnPropertyChanged(RandomConfigPropertyName);
+                }
+            }
+        }
+        private bool _RandomConfig;
+        public const string RandomConfigPropertyName = "RandomConfig";
 
         private void transitionRule() {
             this.transitionRuleArray[0] = int.Parse(this._000.Text);
@@ -146,8 +180,16 @@ namespace ModelAndSimulations {
 
         private void restart() {
             this.Layers.Clear();
-            for (int i = 0; i < 1; i++) {
-                this.Layers.Add(Layer.Generate(NUMBER_OF_STATES, RowSize, () => rand.Next(5)));
+            if (this.RandomConfig) {
+                this.Layers.Add(Layer.Generate(NUMBER_OF_STATES, RowSize, i => rand.Next(5)));
+            } else {
+                this.Layers.Add(Layer.Generate(NUMBER_OF_STATES, RowSize, i => {
+                    if (RowSize / 2 == i) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }));
             }
 
             system = new CASystem(NUMBER_OF_STATES, this.Layers.First(), transitionRule);
@@ -158,10 +200,12 @@ namespace ModelAndSimulations {
             restart();
         }
 
+        Brush validBrush = Brushes.LightGreen;
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
             try {
                 this.RectWidth = int.Parse((sender as TextBox).Text);
-                (sender as TextBox).Background = Brushes.Green;
+                (sender as TextBox).Background = validBrush;
             } catch {
                 (sender as TextBox).Background = Brushes.Red;
             }
@@ -182,7 +226,7 @@ namespace ModelAndSimulations {
         private void RowSize_TextChanged(object sender, TextChangedEventArgs e) {
             try {
                 this.RowSize = int.Parse((sender as TextBox).Text);
-                (sender as TextBox).Background = Brushes.Green;
+                (sender as TextBox).Background = validBrush;
             } catch {
                 (sender as TextBox).Background = Brushes.Red;
             }

@@ -10,6 +10,9 @@
             <ad:LayoutRoot>
                 <ad:LayoutPanel>
                     <ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorable Title="Preferential Attachment">
+                            <m:PreferentialAttachment/>
+                        </ad:LayoutAnchorable>
                         <ad:LayoutAnchorable Title="Cellular Automata 1D">
                             <m:CA1D/>
                         </ad:LayoutAnchorable>

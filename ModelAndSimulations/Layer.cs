@@ -6,10 +6,10 @@ using System.Windows.Media;
 
 namespace ModelAndSimulations {
     public class Layer {
-        public static Layer Generate(int numColors, int length, Func<int> generator){
+        public static Layer Generate(int numColors, int length, Func<int, int> generator){
             var l = new Layer();
             for (int i = 0; i < length; i++) {
-                var c = generator() % numColors;
+                var c = generator(i) % numColors;
                 l.Add(c);
             }
             return l;

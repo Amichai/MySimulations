@@ -91,6 +91,9 @@
     </Compile>
     <Compile Include="Layer.cs" />
     <Compile Include="Notifier.cs" />
+    <Compile Include="PreferentialAttachment.xaml.cs">
+      <DependentUpon>PreferentialAttachment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Urn.cs" />
     <Compile Include="UrnModel.xaml.cs">
       <DependentUpon>UrnModel.xaml</DependentUpon>
@@ -115,6 +118,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PreferentialAttachment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UrnModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
