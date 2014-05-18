@@ -112,5 +112,11 @@ namespace ModelAndSimulations {
             this.HistogramGrid.Children.Clear();
             this.HistogramGrid.Children.Add(this.histogram);
         }
+
+        private void Clear_Click_1(object sender, RoutedEventArgs e) {
+            this.cities.Clear();
+            this.citySizes.Text = "";
+            this.HistogramGrid.Children.Clear();
+        }
     }
 }

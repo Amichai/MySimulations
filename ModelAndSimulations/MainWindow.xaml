@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ModelAndSimulations.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ad="http://avalondock.codeplex.com"
+        xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:h="clr-namespace:ChartingHelper;assembly=ChartingHelper"
         xmlns:m="clr-namespace:ModelAndSimulations"
         Title="MainWindow" Height="600" Width="525">
@@ -10,6 +10,11 @@
             <ad:LayoutRoot>
                 <ad:LayoutPanel>
                     <ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorable Title="Chaos Game">
+                            <Grid>
+                                <m:ChaosGame />
+                            </Grid>
+                        </ad:LayoutAnchorable>
                         <ad:LayoutAnchorable Title="Preferential Attachment">
                             <m:PreferentialAttachment/>
                         </ad:LayoutAnchorable>
@@ -20,7 +25,9 @@
                             <m:Criticality />
                         </ad:LayoutAnchorable>
                         <ad:LayoutAnchorable Title="Urn Model">
-                            <m:UrnModel />
+                            <Grid>
+                                <m:UrnModel />
+                            </Grid>
                         </ad:LayoutAnchorable>
                     </ad:LayoutAnchorablePane>
                 </ad:LayoutPanel>

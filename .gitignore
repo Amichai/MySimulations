@@ -3,3 +3,6 @@ ChartingHelper/obj/
 *.suo
 ModelAndSimulations/bin/
 ModelAndSimulations/obj/
+ChaosGame/bin/
+ChaosGame/obj/
+packages/

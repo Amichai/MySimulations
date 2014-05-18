@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:h="clr-namespace:ChartingHelper;assembly=ChartingHelper"
-             xmlns:ad="http://avalondock.codeplex.com"
+             xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
+             
              d:DesignHeight="300" d:DesignWidth="300">
+             <!--xmlns:ad="http://avalondock.codeplex.com"-->
     <ad:DockingManager x:Name="dockManager">
         <ad:LayoutRoot>
             <ad:LayoutPanel Orientation="Horizontal">

@@ -15,7 +15,6 @@ using System.ComponentModel;
 using System.Threading;
 using System.Collections.ObjectModel;
 using ChartingHelper;
-using AvalonDock.Layout;
 
 namespace ModelAndSimulations {
     /// <summary>

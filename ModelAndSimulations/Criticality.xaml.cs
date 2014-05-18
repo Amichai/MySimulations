@@ -13,8 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChartingHelper;
 using System.Diagnostics;
-using AvalonDock.Layout;
 using OxyPlot;
+using OxyPlot.Series;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace ModelAndSimulations {
     /// <summary>

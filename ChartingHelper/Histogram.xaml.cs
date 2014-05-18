@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OxyPlot;
 using System.ComponentModel;
+using OxyPlot.Series;
+using OxyPlot.Axes;
 
 namespace ChartingHelper {
     /// <summary>

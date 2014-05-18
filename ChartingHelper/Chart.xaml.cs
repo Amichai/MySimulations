@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OxyPlot;
+using OxyPlot.Series;
+using OxyPlot.Axes;
 
 namespace ChartingHelper {
     /// <summary>

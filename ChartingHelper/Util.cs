@@ -5,6 +5,7 @@ using System.Text;
 using OxyPlot;
 using System.Windows;
 using System.Windows.Controls;
+using OxyPlot.Series;
 
 namespace ChartingHelper {
     public static class Util {
